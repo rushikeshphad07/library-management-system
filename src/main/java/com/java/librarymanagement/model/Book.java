@@ -2,65 +2,118 @@ package com.java.librarymanagement.model;
 
 public class Book 
 {
-	private int bookId;
+	private int bookId; // AUTO_INCREMENT
 	private String title;
 	private String author;
 	private String isbn;
 	private int quantity;
 	private int availableQuantity;
-	
-	public Book(String title, String author, String isbn, int quantity, int availableQuantity)
+
+	public Book() 
 	{
-		this.title = title;
-		this.author = author;
-		this.isbn = isbn;
-		this.quantity = quantity;
-		this.availableQuantity = availableQuantity;
 	}
-	
-	public int getBookId() {
+
+	public Book(String title, String author, String isbn, int quantity) 
+	{
+		setTitle(title);
+		setAuthor(author);
+		setIsbn(isbn);
+		setQuantity(quantity);
+		this.availableQuantity = quantity;
+	}
+
+	// For Fetching
+	public Book(String title, String author, String isbn, int quantity, int availableQuantity) 
+	{
+		setTitle(title);
+		setAuthor(author);
+		setIsbn(isbn);
+		setQuantity(quantity);
+		setAvailableQuantity(availableQuantity);
+	}
+
+	public int getBookId() 
+	{
 		return bookId;
 	}
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
-	public String getTitle() {
+
+	public String getTitle() 
+	{
 		return title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setTitle(String title) 
+	{
+		if (title == null || title.isBlank())
+			throw new IllegalArgumentException("Title must be valid!");
+
+		this.title = title.strip();
 	}
-	public String getAuthor() {
+
+	public String getAuthor() 
+	{
 		return author;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+
+	public void setAuthor(String author) 
+	{
+		if (author == null || author.isBlank())
+			throw new IllegalArgumentException("Author name must be valid!");
+
+		this.author = author.strip();
 	}
-	public String getIsbn() {
+
+	public String getIsbn() 
+	{
 		return isbn;
 	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+
+	public void setIsbn(String isbn) 
+	{
+		if (isbn == null || isbn.isBlank())
+			throw new IllegalArgumentException("ISBN number must be valid!");
+
+		this.isbn = isbn.strip();
 	}
-	public int getQuantity() {
+
+	public int getQuantity() 
+	{
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+
+	public void setQuantity(int quantity) 
+	{
+		if (quantity < 0)
+			throw new IllegalArgumentException("Quantity cannot be negative!");
+
+		if (quantity < (this.quantity - this.availableQuantity))
+			throw new IllegalArgumentException("Quantity cannot be less than issued books count!");
+
 		this.quantity = quantity;
+
 	}
-	public int getAvailableQuantity() {
+
+	public int getAvailableQuantity() 
+	{
 		return availableQuantity;
 	}
-	public void setAvailableQuantity(int available_quantity) {
-		this.availableQuantity = available_quantity;
+
+	public void setAvailableQuantity(int availableQuantity) 
+	{
+		if (availableQuantity < 0)
+			throw new IllegalArgumentException("Available quantity cannot be negative!");
+
+		if (availableQuantity > quantity)
+			throw new IllegalArgumentException("Available quantity cannot exceed total quantity!");
+
+		this.availableQuantity = availableQuantity;
 	}
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Book [bookId=" + bookId + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", quantity="
 				+ quantity + ", availableQuantity=" + availableQuantity + "]";
 	}
-	
-	
-	
+
 }
