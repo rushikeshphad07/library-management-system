@@ -1,0 +1,35 @@
+CREATE TABLE users
+(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	role VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE books
+(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(150) NOT NULL,
+	author VARCHAR(100) NOT NULL,
+	isbn VARCHAR(50) UNIQUE,
+	quantity INT NOT NULL
+	available_quantity INT NOT NULL
+);
+
+CREATE TABLE issure_records
+(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	
+	user_id INT NOT NULL,
+	book_id INT NOT NULL,
+	
+	issue_date DATE NOT NULL,
+	due_date DATE NOT NULL,
+	return_date DATE,
+	
+	status VARCHAR(20) NOT NULL,
+	
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	FOREIGN KEY (book_id) REFERENCES books(id);
+);
