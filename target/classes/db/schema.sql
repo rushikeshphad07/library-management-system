@@ -13,11 +13,11 @@ CREATE TABLE books
 	title VARCHAR(150) NOT NULL,
 	author VARCHAR(100) NOT NULL,
 	isbn VARCHAR(50) UNIQUE,
-	quantity INT NOT NULL
+	quantity INT NOT NULL,
 	available_quantity INT NOT NULL
 );
 
-CREATE TABLE issure_records
+CREATE TABLE issue_records
 (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	
@@ -31,5 +31,5 @@ CREATE TABLE issure_records
 	status VARCHAR(20) NOT NULL,
 	
 	FOREIGN KEY (user_id) REFERENCES users(id),
-	FOREIGN KEY (book_id) REFERENCES books(id);
+	FOREIGN KEY (book_id) REFERENCES books(id)
 );

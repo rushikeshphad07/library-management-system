@@ -11,33 +11,12 @@ public class DBConnection
 {
 	public static Connection getConnection()
 	{
-		//Properties --> specialized map for configuration files(key->value)
 		Properties props = new Properties();
-		//Here, props refers to empty property object
-		
-		/*
-		 * getclassLoader() --> classpath context..
-		 *  
-		 * DBConnection.class --> Class object representing DBConnection class 
-		 * 						  or Class object containing metadata of DBConnection class 
-		 * 						  or Class<DBConnection>
-		 * 
-		 * getResourceAsStream() --> only requires classcontext(same package) 
-		 * 							 or classpathcontext(all folders)
-		 * 
-		 * .class --> class literal as it gives fixed, direct value known at compile time.
-		 */
-		
+			
 		try(InputStream in = DBConnection.class.getResourceAsStream("/db.properties"))
 		{	
 			if(in != null)
 			{
-				/*
-				 * Load :- 
-				 * 		1.reads bytes/chars from the stream 
-				 * 		2.parses it into key-value pairs
-				 * 		3.stores them inside props
-				 */
 				props.load(in);
 				
 				String driver = props.getProperty("db.driver");
@@ -72,3 +51,26 @@ public class DBConnection
 		}
 	}
 }
+
+//Properties --> specialized map for configuration files(key->value)
+//Here, props refers to empty property object
+
+/*
+ * getclassLoader() --> classpath context..
+ *  
+ * DBConnection.class --> Class object representing DBConnection class 
+ * 						  or Class object containing metadata of DBConnection class 
+ * 						  or Class<DBConnection>
+ * 
+ * getResourceAsStream() --> only requires classcontext(same package) 
+ * 							 or classpathcontext(all folders)
+ * 
+ * .class --> class literal as it gives fixed, direct value known at compile time.
+ */
+
+/*
+ * Load :- 
+ * 		1.reads bytes/chars from the stream 
+ * 		2.parses it into key-value pairs
+ * 		3.stores them inside props
+ */
