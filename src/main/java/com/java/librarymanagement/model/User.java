@@ -7,6 +7,7 @@ public class User
 	private String email;
 	private String password;
 	private String role;
+	
 	private static final String USER_ROLE = "user";
 	private static final String ADMIN_ROLE = "admin";
 	

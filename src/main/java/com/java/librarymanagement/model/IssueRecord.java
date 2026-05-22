@@ -1,72 +1,145 @@
 package com.java.librarymanagement.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class IssueRecord 
 {
-	private int issueId;
+	private int issueId; //AUTO_INCREMENT
 	private int userId;
 	private int bookId;
-	private Date issueDate;
-	private Date dueDate;
-	private Date returnDate;
-	private boolean status;
+	private LocalDate issueDate;
+	private LocalDate dueDate;
+	private LocalDate returnDate;
+	private String status;
 	
-	public IssueRecord(int userId, int bookId, Date issueDate, Date dueDate, Date returnDate, boolean status)
+	private static final String ISSUED_STATUS = "issued";
+	private static final String RETURNED_STATUS = "returned";
+	private static final String OVERDUE_STATUS = "overdue";
+	
+	//For Creating New Issue Record
+	public IssueRecord(int userId, int bookId, LocalDate issueDate, LocalDate dueDate)
 	{
-		this.userId = userId;
-		this.bookId = bookId;
-		this.issueDate = issueDate;
-		this.dueDate = dueDate;
-		this.returnDate = returnDate;
-		this.status = status;
+		setUserId(userId);
+		setBookId(bookId);
+		setIssueDate(issueDate);
+		setDueDate(dueDate);
+		this.status = ISSUED_STATUS;
 	}
 	
-	public int getIssueId() {
+	//For Accessing Issue Record Data
+	public IssueRecord(int issueId, int userId, int bookId, LocalDate issueDate, LocalDate dueDate, LocalDate returnDate, String status)
+	{
+		setIssueId(issueId);
+		setUserId(userId);
+		setBookId(bookId);
+		setIssueDate(issueDate);
+		setDueDate(dueDate);
+		setReturnDate(returnDate);
+		setStatus(status);
+	}
+	
+	public int getIssueId() 
+	{
 		return issueId;
 	}
-	public void setIssueId(int issueId) {
+	
+	public void setIssueId(int issueId) 
+	{
 		this.issueId = issueId;
 	}
-	public int getUserId() {
+	
+	public int getUserId() 
+	{
 		return userId;
 	}
-	public void setUserId(int userId) {
+	
+	public void setUserId(int userId) 
+	{
+		if(userId <= 0)
+			throw new IllegalArgumentException("User id must be valid");
+		
 		this.userId = userId;
 	}
-	public int getBookId() {
+	
+	public int getBookId() 
+	{
 		return bookId;
 	}
-	public void setBookId(int bookId) {
+	
+	public void setBookId(int bookId) 
+	{
+		if(bookId <= 0)
+			throw new IllegalArgumentException("Book id must be valid!");
+		
 		this.bookId = bookId;
 	}
-	public Date getIssueDate() {
+	
+	public LocalDate getIssueDate() 
+	{
 		return issueDate;
 	}
-	public void setIssueDate(Date issueDate) {
+	
+	public void setIssueDate(LocalDate issueDate) 
+	{
+		if(issueDate == null)
+			throw new IllegalArgumentException("Date must be valid!");
+		
 		this.issueDate = issueDate;
 	}
-	public Date getDueDate() {
+	
+	public LocalDate getDueDate() 
+	{
 		return dueDate;
 	}
-	public void setDueDate(Date dueDate) {
+	
+	public void setDueDate(LocalDate dueDate) 
+	{
+		if(dueDate == null)
+			throw new IllegalArgumentException("Date must be valid!");
+		
+		if(dueDate.isBefore(issueDate))
+		    throw new IllegalArgumentException("Due date cannot be before issue date!");
+		
 		this.dueDate = dueDate;
 	}
-	public Date getReturnDate() {
+	
+	public LocalDate getReturnDate() 
+	{
 		return returnDate;
 	}
-	public void setReturnDate(Date returnDate) {
+	
+	public void setReturnDate(LocalDate returnDate) 
+	{	
+		if(returnDate != null && returnDate.isBefore(issueDate))
+		    throw new IllegalArgumentException("Return date cannot be before issue date!");
+		
 		this.returnDate = returnDate;
 	}
-	public boolean isStatus() {
+	
+	public String getStatus() 
+	{
 		return status;
 	}
-	public void setStatus(boolean status) {
-		this.status = status;
+	
+	public void setStatus(String status) 
+	{
+		if(status == null || status.isBlank())
+			throw new IllegalArgumentException("Status cannot be empty!");
+		
+		if(status.strip().toLowerCase().equals(ISSUED_STATUS) || 
+		   status.strip().toLowerCase().equals(RETURNED_STATUS)|| 
+		   status.strip().toLowerCase().equals(OVERDUE_STATUS))
+		{
+			this.status = status.strip().toLowerCase();
+		}
+		else
+			throw new IllegalArgumentException("Status must be valid!");
 	}
+	
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "IssueRecord [issueId=" + issueId + ", userId=" + userId + ", bookId=" + bookId + ", issueDate="
 				+ issueDate + ", dueDate=" + dueDate + ", returnDate=" + returnDate + ", status=" + status + "]";
 	}
