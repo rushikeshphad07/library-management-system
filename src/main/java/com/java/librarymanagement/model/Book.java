@@ -12,7 +12,8 @@ public class Book
 	public Book() 
 	{
 	}
-
+	
+	//For Creating New Books
 	public Book(String title, String author, String isbn, int quantity) 
 	{
 		setTitle(title);
@@ -22,9 +23,10 @@ public class Book
 		this.availableQuantity = quantity;
 	}
 
-	// For Fetching
-	public Book(String title, String author, String isbn, int quantity, int availableQuantity) 
+	// For Fetching Records
+	public Book(int bookId, String title, String author, String isbn, int quantity, int availableQuantity) 
 	{
+		setBookId(bookId);
 		setTitle(title);
 		setAuthor(author);
 		setIsbn(isbn);
@@ -35,6 +37,11 @@ public class Book
 	public int getBookId() 
 	{
 		return bookId;
+	}
+	
+	public void setBookId(int bookId)
+	{
+		this.bookId = bookId;
 	}
 
 	public String getTitle() 
