@@ -1,7 +1,8 @@
 package com.java.librarymanagement.dao;
 
-import java.awt.print.Book;
 import java.util.List;
+
+import com.java.librarymanagement.model.Book;
 
 public interface BookDAO 
 {
@@ -13,7 +14,7 @@ public interface BookDAO
 	
 	boolean updateBook(Book book);
 	
-	boolean deleteBook(Book book);
+	boolean deleteBook(int id);
 	
 	boolean updateQuantity(int bookId, int quantity);
 }
