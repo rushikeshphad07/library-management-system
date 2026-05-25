@@ -17,4 +17,6 @@ public interface UserDAO
 	boolean updateUser(User user);
 	
 	boolean deleteUser(int id);
+	
+	boolean updateUserRole(int id, String role);
 }

@@ -54,7 +54,6 @@ public class BookDAOImpl implements BookDAO
 		)
 		{
 			pstmt.setInt(1, id);
-			
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -117,7 +116,7 @@ public class BookDAOImpl implements BookDAO
 			e.printStackTrace();
 		}
 		
-		return null;
+		return new ArrayList<>();
 	}
 	
 	@Override
