@@ -60,7 +60,7 @@ public class BookDAOImpl implements BookDAO
 			{
 				Book book = new Book
 				(
-						rs.getInt("book_id"),
+						rs.getInt("id"),
 						rs.getString("title"),
 						rs.getString("author"),
 						rs.getString("isbn"),
@@ -98,7 +98,7 @@ public class BookDAOImpl implements BookDAO
 			{
 				Book book = new Book
 				(
-						rs.getInt("book_id"),
+						rs.getInt("id"),
 						rs.getString("title"),
 						rs.getString("author"),
 						rs.getString("isbn"),

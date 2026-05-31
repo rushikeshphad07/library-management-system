@@ -16,5 +16,5 @@ public interface IssueRecordDAO
 	
 	List<IssueRecord> getIssuesByUserId(int userId);
 	
-	List<IssueRecord> getPendingReturns();
+	List<IssueRecord> getOverdueBooks();
 }
