@@ -104,7 +104,7 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 		return false;
 	}
 
-	@Override
+	@Override 
 	public boolean returnBook(int issueId) 
 	{
 		String getBookId = "SELECT book_id FROM issue_records WHERE issue_id=? and STATUS='issued'";
@@ -291,6 +291,7 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 						rs.getInt("book_id"),
 						rs.getDate("issue_date").toLocalDate(),
 						rs.getDate("due_date").toLocalDate(),
+						rs.getDate("return_date") != null ? rs.getDate("return_date").toLocalDate() : null,
 						rs.getString("status")
 				);
 				

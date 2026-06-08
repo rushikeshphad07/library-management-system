@@ -27,7 +27,7 @@ public class IssueRecord
 	}
 	
 	//For Accessing Issue Record Data
-	public IssueRecord(int issueId, int userId, int bookId, LocalDate issueDate, LocalDate dueDate, String status)
+	public IssueRecord(int issueId, int userId, int bookId, LocalDate issueDate, LocalDate dueDate, LocalDate returnDate, String status)
 	{
 		setIssueId(issueId);
 		setUserId(userId);
@@ -35,6 +35,16 @@ public class IssueRecord
 		setIssueDate(issueDate);
 		setDueDate(dueDate);
 		setReturnDate(returnDate);
+		setStatus(status);
+	}
+	
+	public IssueRecord(int issueId, int userId, int bookId, LocalDate issueDate, LocalDate dueDate, String status)
+	{
+		setIssueId(issueId);
+		setUserId(userId);
+		setBookId(bookId);
+		setIssueDate(issueDate);
+		setDueDate(dueDate);
 		setStatus(status);
 	}
 	
