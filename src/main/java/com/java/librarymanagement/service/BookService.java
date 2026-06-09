@@ -12,15 +12,9 @@ public interface BookService
 	
 	List<Book> getAllBooks();
 	
-	List<Book> searchBooksByTitle(String title);
-	
-	List<Book> searchBooksByAuthor(String author);
-	
 	boolean updateBook(Book book);
 	
 	boolean deleteBook(int id);
 	
 	boolean updateQuantity(int bookId, int quantity);
-	
-	boolean updateAvailableQuantity(int bookId, int availableQuantity);
 }
