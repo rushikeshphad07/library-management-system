@@ -19,4 +19,6 @@ public interface UserService
 	boolean deleteUser(int id);
 	
 	boolean login(String email, String password);
+	
+	boolean updateUserRole(int id, String role);
 }

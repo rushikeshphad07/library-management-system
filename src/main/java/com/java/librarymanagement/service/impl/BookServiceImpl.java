@@ -21,7 +21,7 @@ public class BookServiceImpl implements BookService
 		if(book == null)
 			throw new IllegalArgumentException("Book cannot be null!");
 		
-		Book existingBook = bookDAO.getBookById(book.getBookId());
+		Book existingBook = bookDAO.getBookByISBN(book.getIsbn());
 		
 		if(existingBook != null)
 			throw new IllegalArgumentException("Book already exists!");

@@ -10,6 +10,8 @@ public interface BookDAO
 	
 	Book getBookById(int id);
 	
+	Book getBookByISBN(String isbn);
+	
 	List<Book> getAllBooks();
 	
 	boolean updateBook(Book book);
