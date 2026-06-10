@@ -13,6 +13,10 @@ public class UserServiceImpl implements UserService
 
 	public UserServiceImpl(UserDAO userDAO) 
 	{
+		
+		if(userDAO == null)
+			throw new IllegalArgumentException("DAO cannot be null!");
+		
 		this.userDAO = userDAO;
 	}
 

@@ -12,6 +12,10 @@ public class BookServiceImpl implements BookService
 	private BookDAO bookDAO;
 	public BookServiceImpl(BookDAO bookDAO)
 	{
+		
+		if(bookDAO == null)
+			throw new IllegalArgumentException("DAO cannot be null!");
+		
 		this.bookDAO = bookDAO;
 	}
 
