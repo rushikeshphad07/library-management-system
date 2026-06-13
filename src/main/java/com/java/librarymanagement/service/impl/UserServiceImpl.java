@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public boolean login(String email, String password) 
+	public User login(String email, String password) 
 	{
 		
 	    if(email == null || email.strip().isBlank())
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService
 	    if(!user.getPassword().equals(password))
 	    	throw new InvalidCredentialsException("Invalid email or password!");
 	    
-		return true;
+		return user;
 	}
 	
 	@Override

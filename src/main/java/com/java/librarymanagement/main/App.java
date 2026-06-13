@@ -1,4 +1,4 @@
-package com.java.librarymanagement;
+package com.java.librarymanagement.main;
 
 public class App {
     public static void main(String[] args) {
