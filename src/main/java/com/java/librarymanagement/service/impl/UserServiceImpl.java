@@ -3,6 +3,9 @@ package com.java.librarymanagement.service.impl;
 import java.util.List;
 
 import com.java.librarymanagement.dao.UserDAO;
+import com.java.librarymanagement.exception.InvalidCredentialsException;
+import com.java.librarymanagement.exception.UserAlreadyExistsException;
+import com.java.librarymanagement.exception.UserNotFoundException;
 import com.java.librarymanagement.model.User;
 import com.java.librarymanagement.service.UserService;
 
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService
 		User existingUser = userDAO.getUserByEmail(user.getEmail());
 		
 		if(existingUser != null)
-			throw new IllegalArgumentException("User already exists!");
+			throw new UserAlreadyExistsException("User already exists!");
 		
 		return userDAO.addUser(user);
 	}
@@ -68,7 +71,7 @@ public class UserServiceImpl implements UserService
 			throw new IllegalArgumentException("User cannot be null!");
 		
 		if(userDAO.getUserByEmail(user.getEmail()) == null) 
-			throw new IllegalArgumentException("User not found!");
+			throw new UserNotFoundException("User not found!");
 		
 		return userDAO.updateUser(user);
 	}
@@ -96,9 +99,12 @@ public class UserServiceImpl implements UserService
 	    User user = userDAO.getUserByEmail(email);
 	    
 	    if(user == null)
-	    	return false;
+	    	throw new InvalidCredentialsException("Invalid email or password!");
 	    
-		return user.getPassword().equals(password);
+	    if(!user.getPassword().equals(password))
+	    	throw new InvalidCredentialsException("Invalid email or password!");
+	    
+		return true;
 	}
 	
 	@Override

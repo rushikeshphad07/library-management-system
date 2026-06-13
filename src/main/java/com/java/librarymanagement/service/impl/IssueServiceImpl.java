@@ -6,6 +6,9 @@ import java.util.List;
 import com.java.librarymanagement.dao.BookDAO;
 import com.java.librarymanagement.dao.IssueRecordDAO;
 import com.java.librarymanagement.dao.UserDAO;
+import com.java.librarymanagement.exception.BookNotFoundException;
+import com.java.librarymanagement.exception.InsufficientBookQuantityException;
+import com.java.librarymanagement.exception.UserNotFoundException;
 import com.java.librarymanagement.model.Book;
 import com.java.librarymanagement.model.IssueRecord;
 import com.java.librarymanagement.model.User;
@@ -37,13 +40,13 @@ public class IssueServiceImpl implements IssueService
 		Book book = bookDAO.getBookById(bookId);
 		
 	    if(user == null)
-	        throw new IllegalArgumentException("User not found!");
+	        throw new UserNotFoundException("User not found!");
 
 	    if(book == null)
-	        throw new IllegalArgumentException("Book not found!");
+	        throw new BookNotFoundException("Book not found!");
 	    
 	    if(book.getAvailableQuantity() <= 0)
-	    	throw new IllegalArgumentException("Book is not available!");
+	    	throw new InsufficientBookQuantityException("Book is not available!");
 	    
 	    IssueRecord issueRecord = new IssueRecord
 	    (

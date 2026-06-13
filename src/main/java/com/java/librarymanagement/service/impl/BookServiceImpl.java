@@ -3,6 +3,8 @@ package com.java.librarymanagement.service.impl;
 import java.util.List;
 
 import com.java.librarymanagement.dao.BookDAO;
+import com.java.librarymanagement.exception.BookAlreadyExistsException;
+import com.java.librarymanagement.exception.BookNotFoundException;
 import com.java.librarymanagement.model.Book;
 import com.java.librarymanagement.service.BookService;
 
@@ -28,7 +30,7 @@ public class BookServiceImpl implements BookService
 		Book existingBook = bookDAO.getBookByISBN(book.getIsbn());
 		
 		if(existingBook != null)
-			throw new IllegalArgumentException("Book already exists!");
+			throw new BookAlreadyExistsException("Book already exists!");
 		
 		return bookDAO.addBook(book);
 	}
@@ -56,7 +58,7 @@ public class BookServiceImpl implements BookService
 			throw new IllegalArgumentException("Book cannot be null!");
 		
 		if(bookDAO.getBookById(book.getBookId()) == null)
-			throw new IllegalArgumentException("Book not found!");
+			throw new BookNotFoundException("Book not found!");
 		
 		return bookDAO.updateBook(book);
 	}
