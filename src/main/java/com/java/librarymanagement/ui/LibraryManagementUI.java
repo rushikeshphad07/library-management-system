@@ -3,21 +3,12 @@ package com.java.librarymanagement.ui;
 import java.util.List;
 import java.util.Scanner;
 
-import com.java.librarymanagement.dao.BookDAO;
-import com.java.librarymanagement.dao.IssueRecordDAO;
-import com.java.librarymanagement.dao.UserDAO;
-import com.java.librarymanagement.dao.impl.BookDAOImpl;
-import com.java.librarymanagement.dao.impl.IssueRecordDAOImpl;
-import com.java.librarymanagement.dao.impl.UserDAOImpl;
 import com.java.librarymanagement.model.Book;
 import com.java.librarymanagement.model.IssueRecord;
 import com.java.librarymanagement.model.User;
 import com.java.librarymanagement.service.BookService;
 import com.java.librarymanagement.service.IssueService;
 import com.java.librarymanagement.service.UserService;
-import com.java.librarymanagement.service.impl.BookServiceImpl;
-import com.java.librarymanagement.service.impl.IssueServiceImpl;
-import com.java.librarymanagement.service.impl.UserServiceImpl;
 
 public class LibraryManagementUI 
 {
@@ -29,17 +20,12 @@ public class LibraryManagementUI
 	
 	private User currentUser;
 	
-	public LibraryManagementUI()
+	public LibraryManagementUI(UserService userService, BookService bookService, IssueService issueService, Scanner sc)
 	{
-		sc = new Scanner(System.in);
-		
-		UserDAO userDAO = new UserDAOImpl();
-		BookDAO bookDAO = new BookDAOImpl();
-		IssueRecordDAO issueRecordDAO = new IssueRecordDAOImpl();
-		
-		userService = new UserServiceImpl(userDAO);
-		bookService = new BookServiceImpl(bookDAO);
-		issueService = new IssueServiceImpl(bookDAO, userDAO ,issueRecordDAO);
+		this.sc = sc;
+		this.userService = userService;
+		this.bookService = bookService;
+		this.issueService = issueService;
 	}
 	
 	public void start()
