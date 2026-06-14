@@ -20,13 +20,6 @@ public class User
 		setRole(role);
 	}
 	
-	public User(String name, String email, String password)
-	{
-		setName(name);
-		setEmail(email);
-		setPassword(password);
-	}
-	
 	//For Accessing User Records
 	public User(int userId, String name, String email, String password, String role)
 	{

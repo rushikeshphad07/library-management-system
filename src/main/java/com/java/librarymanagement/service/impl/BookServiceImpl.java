@@ -41,7 +41,26 @@ public class BookServiceImpl implements BookService
 		if(id <= 0)
 			throw new IllegalArgumentException("Invalid Book Id!");
 		
-		return bookDAO.getBookById(id);
+		Book book = bookDAO.getBookById(id);
+		
+		if(book == null)
+			throw new BookNotFoundException("Book not found!");
+		
+		return book;
+	}
+	
+	@Override
+	public Book getBookByISBN(String isbn) 
+	{
+		if (isbn == null || isbn.isBlank())
+			throw new IllegalArgumentException("Invalid ISBN number!");
+		
+		Book book = bookDAO.getBookByISBN(isbn);
+		
+		if(book == null)
+			throw new BookNotFoundException("Book not found!");
+		
+		return book;
 	}
 
 	@Override

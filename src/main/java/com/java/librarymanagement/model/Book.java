@@ -8,10 +8,6 @@ public class Book
 	private String isbn;
 	private int quantity;
 	private int availableQuantity;
-
-	public Book() 
-	{
-	}
 	
 	//For Creating New Books
 	public Book(String title, String author, String isbn, int quantity) 
@@ -21,6 +17,16 @@ public class Book
 		setIsbn(isbn);
 		setQuantity(quantity);
 		this.availableQuantity = quantity;
+	}
+	
+	//For Updating Books
+	public Book(int id, String title, String author, String isbn, int quantity) 
+	{
+		setBookId(id);
+		setTitle(title);
+		setAuthor(author);
+		setIsbn(isbn);
+		setQuantity(quantity);
 	}
 
 	// For Fetching Records

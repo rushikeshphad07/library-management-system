@@ -8,7 +8,7 @@ public interface IssueRecordDAO
 {
 	boolean issueBook(IssueRecord record);
 	
-	boolean returnBook(int issueId);
+	boolean returnBook(int userId, int bookId);
 	
 	IssueRecord getIssueById(int id);
 	

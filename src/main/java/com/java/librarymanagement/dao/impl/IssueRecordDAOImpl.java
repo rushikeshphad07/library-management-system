@@ -105,10 +105,9 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 	}
 
 	@Override 
-	public boolean returnBook(int issueId) 
+	public boolean returnBook(int userId, int bookId) 
 	{
-		String getBookId = "SELECT book_id FROM issue_records WHERE issue_id=? and STATUS='issued'";
-		String returnQuery = "UPDATE issue_records SET return_date=?, status=? WHERE issue_id=?";
+		String returnQuery = "UPDATE issue_records SET return_date=?, status=? WHERE book_id=? AND user_id=? AND STATUS='issued'";
 		String updateBookQuery = "UPDATE books SET available_quantity=available_quantity+1 WHERE book_id=?";
 		
 		try
@@ -117,28 +116,6 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 		)
 		{
 			conn.setAutoCommit(false);
-			int bookId = 0;
-			
-			//1. Access BookId
-			try
-			(
-					PreparedStatement getPstmt = conn.prepareStatement(getBookId);
-			)
-			{
-				getPstmt.setInt(1, issueId);
-				
-				ResultSet rs = getPstmt.executeQuery();
-				
-				if(rs.next())
-				{
-					bookId = rs.getInt("book_id");
-				}
-				else
-				{
-					conn.rollback();
-					return false;
-				}
-			}
 			
 			//2. Update Issue Record
 			try
@@ -148,7 +125,8 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 			{
 				returnPstmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
 				returnPstmt.setString(2, "returned");
-				returnPstmt.setInt(3, issueId);
+				returnPstmt.setInt(3, bookId);
+				returnPstmt.setInt(4, userId);
 				
 				int rowsAffected = returnPstmt.executeUpdate();
 				

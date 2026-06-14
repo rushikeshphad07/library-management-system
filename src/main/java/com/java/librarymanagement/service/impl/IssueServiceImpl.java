@@ -60,13 +60,13 @@ public class IssueServiceImpl implements IssueService
 	}
 
 	@Override
-	public boolean returnBook(int issueId) 
+	public boolean returnBook(int userId, int bookId) 
 	{
 		
-		if(issueId <= 0)
+		if(bookId <= 0)
 			throw new IllegalArgumentException("Invalid ID!");
 		
-		return issueRecordDAO.returnBook(issueId);
+		return issueRecordDAO.returnBook(userId, bookId);
 	}
 
 	@Override

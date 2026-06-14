@@ -8,7 +8,7 @@ public interface IssueService
 {
 	boolean issueBook(int bookId, int userId);
 	
-	boolean returnBook(int issueId);
+	boolean returnBook(int userId, int bookId);
 	
 	IssueRecord getIssueById(int issueId);
 	
