@@ -51,6 +51,7 @@ public class LibraryManagementUI
 	        		case 3 -> 
 	        		{
 	        			System.out.println("Exiting..");
+	        			System.out.println("Thank You For Using This Application.");
 	        			return;
 	        		}
 	        		
@@ -72,10 +73,10 @@ public class LibraryManagementUI
 		System.out.print("Email : ");
 		String email = sc.nextLine();
 		
-		System.out.println("Password : ");
+		System.out.print("Password : ");
 		String password = sc.nextLine();
 		
-		User user = new User(name, email, password, "MEMBER");
+		User user = new User(name, email, password, "USER");
 		
 		try
 		{
@@ -443,7 +444,7 @@ public class LibraryManagementUI
 			Book book = bookService.getBookById(bookId);
 			
 			if(issueService.issueBook(bookId, currentUser.getUserId()))
-				System.out.println(book.getTitle() + "borrowed successfully!");
+				System.out.println(book.getTitle() + " - borrowed successfully!");
 			else
 				System.out.println("Failed to borrow book!");
 		}

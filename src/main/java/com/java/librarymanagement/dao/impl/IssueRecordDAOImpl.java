@@ -18,9 +18,9 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 	@Override
 	public boolean issueBook(IssueRecord record) 
 	{
-		String checkBook = "SELECT available_quantity FROM books WHERE book_id=?";
+		String checkBook = "SELECT available_quantity FROM books WHERE id=?";
 		String insertQuery = "INSERT INTO issue_records(user_id, book_id, issue_date, due_date, status) VALUES(?, ?, ?, ?, ?)";
-		String updateBookQuery = "UPDATE books SET available_quantity = available_quantity-1 WHERE book_id=? AND available_quantity>0";
+		String updateBookQuery = "UPDATE books SET available_quantity = available_quantity-1 WHERE id=? AND available_quantity>0";
 		
 		try
 		(
@@ -108,7 +108,7 @@ public class IssueRecordDAOImpl implements IssueRecordDAO
 	public boolean returnBook(int userId, int bookId) 
 	{
 		String returnQuery = "UPDATE issue_records SET return_date=?, status=? WHERE book_id=? AND user_id=? AND STATUS='issued'";
-		String updateBookQuery = "UPDATE books SET available_quantity=available_quantity+1 WHERE book_id=?";
+		String updateBookQuery = "UPDATE books SET available_quantity=available_quantity+1 WHERE id=?";
 		
 		try
 		(

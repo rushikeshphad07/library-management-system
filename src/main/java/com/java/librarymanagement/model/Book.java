@@ -16,7 +16,7 @@ public class Book
 		setAuthor(author);
 		setIsbn(isbn);
 		setQuantity(quantity);
-		this.availableQuantity = quantity;
+		setAvailableQuantity(quantity);
 	}
 	
 	//For Updating Books
@@ -27,6 +27,7 @@ public class Book
 		setAuthor(author);
 		setIsbn(isbn);
 		setQuantity(quantity);
+		setAvailableQuantity(quantity);
 	}
 
 	// For Fetching Records

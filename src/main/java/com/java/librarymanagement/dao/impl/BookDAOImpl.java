@@ -17,7 +17,7 @@ public class BookDAOImpl implements BookDAO
 	@Override
 	public boolean addBook(Book book)
 	{
-		String query = "INSERT INTO books(title, author, isbn, quantity) VALUES(?, ?, ?, ?)";
+		String query = "INSERT INTO books(title, author, isbn, quantity, available_quantity) VALUES(?, ?, ?, ?, ?)";
 		
 		try
 		(
@@ -27,8 +27,9 @@ public class BookDAOImpl implements BookDAO
 		{
 			pstmt.setString(1, book.getTitle());
 			pstmt.setString(2, book.getAuthor());
-			pstmt.setString(2, book.getIsbn());
-			pstmt.setInt(3, book.getQuantity());
+			pstmt.setString(3, book.getIsbn());
+			pstmt.setInt(4, book.getQuantity());
+			pstmt.setInt(5, book.getAvailableQuantity());
 			
 			int rowsAffected = pstmt.executeUpdate();
 			
@@ -45,7 +46,7 @@ public class BookDAOImpl implements BookDAO
 	@Override
 	public Book getBookById(int id)
 	{
-		String query = "SELECT * FROM book WHERE id=?";
+		String query = "SELECT * FROM books WHERE id=?";
 		
 		try
 		(
@@ -82,7 +83,7 @@ public class BookDAOImpl implements BookDAO
 	@Override
 	public Book getBookByISBN(String isbn)
 	{
-		String query = "SELECT * FROM book WHERE isbn=?";
+		String query = "SELECT * FROM books WHERE isbn=?";
 		
 		try
 		(
@@ -119,7 +120,7 @@ public class BookDAOImpl implements BookDAO
 	@Override
 	public List<Book> getAllBooks()
 	{
-		String query = "SELECT * FROM book";
+		String query = "SELECT * FROM books";
 		
 		try
 		(
@@ -159,7 +160,7 @@ public class BookDAOImpl implements BookDAO
 	@Override
 	public boolean updateBook(Book book)
 	{
-		String query = "UPDATE books SET title=?, author=?, isbn=? WHERE id=?";
+		String query = "UPDATE books SET title=?, author=?, isbn=?, quantity=?, available_quantity=? WHERE id=?";
 		
 		try
 		(
@@ -170,7 +171,9 @@ public class BookDAOImpl implements BookDAO
 			pstmt.setString(1, book.getTitle());
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setString(3, book.getIsbn());
-			pstmt.setInt(4, book.getBookId());
+			pstmt.setInt(4, book.getQuantity());
+			pstmt.setInt(5, book.getAvailableQuantity());
+			pstmt.setInt(6, book.getBookId());
 			
 			int rowsAffected = pstmt.executeUpdate();
 			
